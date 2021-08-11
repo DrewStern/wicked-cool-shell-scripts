@@ -31,7 +31,7 @@ if [ $3 -le 99 ]; then
 	exit 1
 fi
 
-if [ -z $(echo ${1}|sed 's/[[:digit:]]//g') ]; then
+if [ -z $(echo ${1} | sed 's/[[:digit:]]//g') ]; then
 	monthNumToName $1
 else
 	month="$(echo $1 | cut -c1 | tr '[:lower:]' '[:upper:]' )"

@@ -15,8 +15,7 @@ monthNumToName()
 		10) month="Oct";; 
 		11) month="Nov";; 
 		12) month="Dec";; 
-		* )
-			echo "$0: Unknown month value $1" > &2
+		* ) echo "$0: Unknown month value $1" >&2
 			exit 1
 	esac
 	return 0
@@ -28,15 +27,15 @@ if [ $# -ne 3 ]; then
 	exit 1
 fi
 if [ $3 -le 99 ]; then
-	echo "$0: expected 4-diogit year value." >&2
+	echo "$0: expected 4-digit year value." >&2
 	exit 1
 fi
 
-if [ -z $(echo ${1}|sed's/[[:digit:]]//g') ]; then
+if [ -z $(echo ${1}|sed 's/[[:digit:]]//g') ]; then
 	monthNumToName $1
 else
-	month="$(echo $1|cut -c1|tr '[:lower]' '[:upper:]' )"
-	month="$month$(echo $1|cut -c2-3 | tr '[:upper:]' '[:lower:]' )"
+	month="$(echo $1 | cut -c1 | tr '[:lower:]' '[:upper:]' )"
+	month="$month$(echo $1 | cut -c2-3 | tr '[:upper:]' '[:lower:]' )"
 fi
 
 echo $month $2 $3
